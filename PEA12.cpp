@@ -6,6 +6,7 @@ using namespace std;
 
 int choice;
 int run = 1;
+string filename = "nic";
 
 int main()
 {
@@ -15,10 +16,11 @@ int main()
     while (run)
     {
         cout << "MENU:\n";;
-        cout << "1. Wygeneruj losowe dane\n";
-        cout << "2. Wyswietl dane\n";
-        cout << "3. Uruchom algorytm\n";
-        cout << "4. Zakoncz\n";
+        cout << "1. Wczytaj dane z pliku\n";
+        cout << "2. Wygeneruj losowe dane\n";
+        cout << "3. Wyswietl wczytane dane\n";
+        cout << "4. Uruchom algorytm\n";
+        cout << "5. Zakoncz\n";
 
         cin >> choice;
         system("CLS"); // czyszczenie ekranu
@@ -26,36 +28,40 @@ int main()
         {
         case 1:
         {
-            cout << "Ile wierzcholkow?\n";
-            int N;
-            cin >> N;
-            cout << "Podaj nazwe pliku wraz z rozszerzeniem:\n";
-            string filename;
-            filename = "test.txt";
+            cout << "Podaj nazwe pliku do wyswietlenia:\n";
             cin >> filename;
-
-            fHandler.generate(N, filename);
         }
         break;
         case 2:
         {
-            cout << "Podaj nazwe pliku do wyswietlenia:\n";
-            string filename;
-            cin >> filename;
+            cout << "Ile wierzcholkow?\n";
+            int N;
+            cin >> N;
+            cout << "Podaj nazwe pliku wraz z rozszerzeniem:\n";
+            string newFilename;
+            cin >> newFilename;
 
-            fHandler.print(filename);
+            fHandler.generate(N, filename);
         }
         break;
         case 3:
         {
-            cout << "Podaj nazwe pliku do wczytania:\n";
-            string filename;
-            cin >> filename;
-
-            fHandler.openFile(filename);
+            if (filename != "nic")
+                fHandler.print(filename);
+            else
+                cout << "Wczytaj dane z pliku!\n";
         }
         break;
         case 4:
+        {
+            if (filename != "nic")
+                fHandler.openFile(filename);
+            else
+                cout << "Wczytaj dane z pliku!\n";
+
+        }
+        break;
+        case 5:
             cout << "Koniec programu\n";
             run = 0;
             break;
