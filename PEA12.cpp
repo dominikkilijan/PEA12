@@ -40,7 +40,7 @@ int main()
             string newFilename;
             cin >> newFilename;
 
-            fHandler.generate(N, filename);
+            fHandler.generate(N, newFilename);
         }
         break;
         case 3:

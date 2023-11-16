@@ -18,7 +18,9 @@ long double Dynamic::TSPDynamic()
 {
 	long long int frequency, start, elapsed; // zmienne zwiazane z pomiarem czasu
 	QueryPerformanceFrequency((LARGE_INTEGER*)&frequency);
-	start = read_QPC(); // rozpoczecie pomiaru czasu
+
+	// rozpoczecie pomiaru czasu
+	start = read_QPC(); 
 
 	// algorytm
 	Sleep(1000);
