@@ -1,5 +1,4 @@
 ﻿#include "FileHandler.h"
-//include "Bruteforce.h"
 #include <iostream>
 
 using namespace std;
