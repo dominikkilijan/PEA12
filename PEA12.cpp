@@ -1,20 +1,68 @@
-﻿// PEA12.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
-
+﻿#include "FileHandler.h"
+//include "Bruteforce.h"
 #include <iostream>
+
+using namespace std;
+
+int choice;
+int run = 1;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    FileHandler fHandler;
+
+    // menu wyswietlane ciagle
+    while (run)
+    {
+        cout << "MENU:\n";;
+        cout << "1. Wygeneruj losowe dane\n";
+        cout << "2. Wyswietl dane\n";
+        cout << "3. Uruchom algorytm\n";
+        cout << "4. Zakoncz\n";
+
+        cin >> choice;
+        system("CLS"); // czyszczenie ekranu
+        switch (choice)
+        {
+        case 1:
+        {
+            cout << "Ile wierzcholkow?\n";
+            int N;
+            cin >> N;
+            cout << "Podaj nazwe pliku wraz z rozszerzeniem:\n";
+            string filename;
+            filename = "test.txt";
+            cin >> filename;
+
+            fHandler.generate(N, filename);
+        }
+        break;
+        case 2:
+        {
+            cout << "Podaj nazwe pliku do wyswietlenia:\n";
+            string filename;
+            cin >> filename;
+
+            fHandler.print(filename);
+        }
+        break;
+        case 3:
+        {
+            cout << "Podaj nazwe pliku do wczytania:\n";
+            string filename;
+            cin >> filename;
+
+            fHandler.openFile(filename);
+        }
+        break;
+        case 4:
+            cout << "Koniec programu\n";
+            run = 0;
+            break;
+
+        default:
+            cout << "Nieprawidlowy numer!\n";
+            break;
+        }
+    }
 }
-
-// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
-// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
-
-// Porady dotyczące rozpoczynania pracy:
-//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
-//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
-//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
-//   4. Użyj okna Lista błędów, aby zobaczyć błędy
-//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
-//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
