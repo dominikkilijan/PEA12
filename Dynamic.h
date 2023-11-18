@@ -9,6 +9,8 @@ class Dynamic
 		int tsp(int, int);
 		long long int read_QPC();
 		long double TSPDynamic();
+		void printdp();
+		void printpath();
 
 	private:
 		//int* bestPath;
@@ -17,10 +19,12 @@ class Dynamic
 		vector<int> currentPath;
 		vector<int> bestPath;
 
+		int** path;
 		int** dp;
 		int N;
 		int N2;
 		int** matrix;
 		int visitedAll;
+		int lastBestNode;
 };
 
