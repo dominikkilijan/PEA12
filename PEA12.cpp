@@ -5,14 +5,14 @@ using namespace std;
 
 int choice;
 int run = 1;
-string filename = "invindia.txt";
+string filename = "nic";
 
 int main()
 {
     FileHandler fHandler;
 
     // menu wyswietlane ciagle
-    //while (run)
+    while (run)
     {
         cout << "MENU:\n";;
         cout << "1. Wczytaj dane z pliku\n";
@@ -21,8 +21,8 @@ int main()
         cout << "4. Uruchom algorytm\n";
         cout << "5. Zakoncz\n";
 
-        //cin >> choice;
-        choice = 4;
+        cin >> choice;
+        //choice = 4;
         system("CLS"); // czyszczenie ekranu
         switch (choice)
         {

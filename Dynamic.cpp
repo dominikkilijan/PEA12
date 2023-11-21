@@ -39,7 +39,6 @@ Dynamic::Dynamic(int n, int** m)
 //------------------------------------------------------------------------------------------------------------------------------------
 Answer Dynamic::tsp(int mask, int pos)
 {
-	int currentSum = 0;
 	Answer answer(N);
 	vector<int> bestPath;
 
@@ -47,15 +46,12 @@ Answer Dynamic::tsp(int mask, int pos)
 
 	if (mask == visitedAll) // jesli odwiedzono wszystkie wierzcholki
 	{
-		//return matrix[pos][0];
 		answer.sum = matrix[pos][0];
-		cout << "visited return answer.sum = " << answer.sum << " pos = " << pos << "->0" << endl;
 		answer.pathAnswer.emplace_back(pos);
 		return answer;
 	}
 
 	if (dp[mask][pos] != -1) // sprawdzenie czy przypadek juz byl liczony
-		//return dp[mask][pos] = currentSum;
 		return answer;
 
 	int bestSum = INT_MAX;
@@ -63,45 +59,26 @@ Answer Dynamic::tsp(int mask, int pos)
 	{
 		if ((mask & (1 << i)) == 0) // sprawdzenie czy wierzochlek byl juz odwiedzony
 		{
-			cout << i << endl;
-			//answer.pathAnswer.emplace_back(i);
-			if (mask == visitedAll)
+			if (answer.sum != 0)
 				answer.pathAnswer.clear();
-			
-			answer.sum += matrix[pos][i];
+
+			answer.sum = matrix[pos][i];
 			answer.addAnswers(tsp(mask | (1 << i), i));
-			//answer.sum = matrix[pos][i] + tsp(mask|(1<<i), i); // odleglosc z obecnego punktu do nastepnego + kolejne odcinki
-			cout << "answer.pathAnswer.emplace_back = " << pos << endl;
 			if (mask != visitedAll)
 				answer.pathAnswer.emplace_back(pos);
-			path[pos][i] = currentSum;
-			//printpath();
-			cout << "pos = " << pos << "," << "i = " << i << endl;
-			cout << "mask = ";
-			bitset<4> y(mask);
-			cout << y << endl;
+
 			if (bestSum > answer.sum)
 			{
-				cout << "dla best> curr: answer.sum = " << answer.sum << endl;
 				bestSum = answer.sum;
 				answer.sum = 0;
 				bestPath.clear();
 				bestPath = answer.pathAnswer;
 				answer.pathAnswer.clear();
-				lastBestNode = i;
-				//currentPath.emplace_back(i);
 			}
 
 		}
 	}
-	/*cout << "bestSum = " << bestSum << "\nSciezka:\n";
-	for (int i = bestPath.size() - 1; i >= 0; i--)
-	{
-		cout << bestPath[i] << " ";
-	}
-	cout << endl;*/
 
-	//return dp[mask][pos] = bestSum;
 	answer.pathAnswer = bestPath;
 	answer.sum = bestSum;
 	return answer;
@@ -118,7 +95,6 @@ long double Dynamic::TSPDynamic()
 	start = read_QPC();
 
 	// algorytm
-	//cout << tsp(1, 0) << "\n";
 	finalAnswer = tsp(1, 0);
 	// koniec algorytmu
 
@@ -128,16 +104,18 @@ long double Dynamic::TSPDynamic()
 	timeElapsed = ((1000.0 * elapsed) / frequency);
 
 	// wyswietlenie wyniku
-	cout << "Miejsce na wynik\n";
+	cout << "Miejsce na wynik\n\n\n====================================================================================\n";
 	cout << "finalAnswer.sum = " << finalAnswer.sum << "\nSciezka:\n";
+	//cout << "0->";
 	for (int i = finalAnswer.pathAnswer.size() - 1; i >= 0; i--)
+	//for (int i = 0; i < finalAnswer.pathAnswer.size()/2; i++)
 	{
 		cout << finalAnswer.pathAnswer[i] << "->";
 	}
 	cout << "0" << endl;
 
-	
-	printdp();
+
+	//printdp();
 	/*for (int i = 0; i < currentPath.size(); i++)
 	{
 		cout << currentPath[i] << " ";
