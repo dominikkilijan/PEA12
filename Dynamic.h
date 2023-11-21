@@ -1,12 +1,13 @@
 #pragma once
 #include "AdjacencyMatrix.h"
+#include "Answer.h"
 #include <vector>
 
 class Dynamic
 {
 	public:
 		Dynamic(int, int**);
-		int tsp(int, int);
+		Answer tsp(int, int);
 		long long int read_QPC();
 		long double TSPDynamic();
 		void printdp();

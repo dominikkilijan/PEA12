@@ -5,7 +5,7 @@ using namespace std;
 
 int choice;
 int run = 1;
-string filename = "nic";
+string filename = "india.txt";
 
 int main()
 {
@@ -22,6 +22,7 @@ int main()
         cout << "5. Zakoncz\n";
 
         cin >> choice;
+        //choice = 4;
         system("CLS"); // czyszczenie ekranu
         switch (choice)
         {
