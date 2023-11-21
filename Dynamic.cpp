@@ -41,12 +41,13 @@ Answer Dynamic::tsp(int mask, int pos)
 {
 	int currentSum = 0;
 	Answer answer(N);
+	vector<int> bestPath;
 
 	//printdp();
 
 	if (mask == visitedAll) // jesli odwiedzono wszystkie wierzcholki
-		//return matrix[pos][0];
 	{
+		//return matrix[pos][0];
 		answer.sum = matrix[pos][0];
 		cout << "visited return answer.sum = " << answer.sum << " pos = " << pos << "->0" << endl;
 		answer.pathAnswer.emplace_back(pos);
@@ -64,9 +65,15 @@ Answer Dynamic::tsp(int mask, int pos)
 		{
 			cout << i << endl;
 			//answer.pathAnswer.emplace_back(i);
+			if (mask == visitedAll)
+				answer.pathAnswer.clear();
+			
 			answer.sum += matrix[pos][i];
 			answer.addAnswers(tsp(mask | (1 << i), i));
 			//answer.sum = matrix[pos][i] + tsp(mask|(1<<i), i); // odleglosc z obecnego punktu do nastepnego + kolejne odcinki
+			cout << "answer.pathAnswer.emplace_back = " << pos << endl;
+			if (mask != visitedAll)
+				answer.pathAnswer.emplace_back(pos);
 			path[pos][i] = currentSum;
 			//printpath();
 			cout << "pos = " << pos << "," << "i = " << i << endl;
@@ -78,16 +85,22 @@ Answer Dynamic::tsp(int mask, int pos)
 				cout << "dla best> curr: answer.sum = " << answer.sum << endl;
 				bestSum = answer.sum;
 				answer.sum = 0;
-				cout << "dla best> curr: answer.sum = " << answer.sum << endl;
+				bestPath.clear();
 				bestPath = answer.pathAnswer;
 				answer.pathAnswer.clear();
 				lastBestNode = i;
 				//currentPath.emplace_back(i);
-				cout << "lastBestNode = " << lastBestNode << endl << endl;
 			}
 
 		}
 	}
+	/*cout << "bestSum = " << bestSum << "\nSciezka:\n";
+	for (int i = bestPath.size() - 1; i >= 0; i--)
+	{
+		cout << bestPath[i] << " ";
+	}
+	cout << endl;*/
+
 	//return dp[mask][pos] = bestSum;
 	answer.pathAnswer = bestPath;
 	answer.sum = bestSum;
@@ -119,9 +132,11 @@ long double Dynamic::TSPDynamic()
 	cout << "finalAnswer.sum = " << finalAnswer.sum << "\nSciezka:\n";
 	for (int i = finalAnswer.pathAnswer.size() - 1; i >= 0; i--)
 	{
-		cout << finalAnswer.pathAnswer[i] << " ";
+		cout << finalAnswer.pathAnswer[i] << "->";
 	}
-	cout << endl;
+	cout << "0" << endl;
+
+	
 	printdp();
 	/*for (int i = 0; i < currentPath.size(); i++)
 	{

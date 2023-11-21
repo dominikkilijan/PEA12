@@ -18,7 +18,7 @@ class Dynamic
 		//int bestSum = 2147483647; // najwieksza dostepna wartosc
 		//int* currentPath;
 		vector<int> currentPath;
-		vector<int> bestPath;
+		//vector<int> bestPath;
 
 		int** path;
 		int** dp;
