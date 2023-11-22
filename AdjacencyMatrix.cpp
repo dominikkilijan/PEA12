@@ -1,5 +1,6 @@
 #include "AdjacencyMatrix.h"
 //#include "Bruteforce.h"
+#include "Dynamic2.h"
 #include "Dynamic.h"
 #include <iostream>
 #include <iomanip>
@@ -67,6 +68,7 @@ void AdjacencyMatrix::fillFromFile(fstream* file)
 		for (int i = 0; i < 1; i++)
 		{
 			//Bruteforce brute(N, matrix);
+			//Dynamic2 dynamic(N, matrix);
 			Dynamic dynamic(N, matrix);
 			//sumElapsed += brute.TSPBrute();
 			sumElapsed += dynamic.TSPDynamic();

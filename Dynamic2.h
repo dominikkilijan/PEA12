@@ -1,15 +1,15 @@
 #pragma once
 #include "AdjacencyMatrix.h"
+#include "Answer.h"
 #include <vector>
 
-class Dynamic
+class Dynamic2
 {
 public:
-	Dynamic(int, int**);
-	int tsp(int, int);
+	Dynamic2(int, int**);
+	Answer tsp(int, int);
 	long long int read_QPC();
 	long double TSPDynamic();
-	void decodePath(int, int);
 	void printdp();
 	void printpath();
 
@@ -18,7 +18,7 @@ private:
 	//int bestSum = 2147483647; // najwieksza dostepna wartosc
 	//int* currentPath;
 	vector<int> currentPath;
-	vector<int> bestPath;
+	//vector<int> bestPath;
 
 	int** path;
 	int** dp;
