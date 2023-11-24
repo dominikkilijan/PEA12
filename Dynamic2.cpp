@@ -159,9 +159,9 @@ void Dynamic2::printdp()
 void Dynamic2::printpath()
 {
 
-	for (int i = 0; i < N2; i++)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 0; j < N; j++)
+		for (int j = 0; j < N2; j++)
 		{
 			cout << path[i][j] << " ";
 		}

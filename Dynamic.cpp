@@ -19,6 +19,8 @@ Dynamic::Dynamic(int n, int** m)
 	N2 = (1 << N);
 	dp = new int* [N2];
 	path = new int* [N];
+	bestPath.reserve(N);
+
 	for (int i = 0; i < N2; i++)
 	{
 		dp[i] = new int[N];
@@ -37,12 +39,27 @@ Dynamic::Dynamic(int n, int** m)
 	}
 
 }
+Dynamic::~Dynamic()
+{
+	for (int i = 0; i < N2; i++)
+	{
+		delete[] dp[i];
+	}
+	delete[] dp;
+	dp = nullptr;
+
+	for (int i = 0; i < N; i++)
+	{
+		delete[] path[i];
+	}
+	delete[] path;
+	path = nullptr;
+
+	matrix = nullptr;
+}
 //------------------------------------------------------------------------------------------------------------------------------------
 int Dynamic::tsp(int mask, int pos)
 {
-
-	//printdp();
-
 	if (mask == visitedAll) // jesli odwiedzono wszystkie wierzcholki
 		return matrix[pos][0];
 
@@ -55,19 +72,10 @@ int Dynamic::tsp(int mask, int pos)
 		if ((mask & (1 << i)) == 0) // sprawdzenie czy wierzochlek byl juz odwiedzony
 		{
 			int currentSum = matrix[pos][i] + tsp(mask | (1 << i), i); // odleglosc z obecnego punktu do nastepnego + kolejne odcinki
-			//bestSum = min(bestSum, currentSum);
-			//path[pos][i] = currentSum;
-			//printpath();
-			//cout << "pos = " << pos << "," << "i = " << i << endl;
-			//cout << "mask = ";
-			//bitset<4> y(mask);
-			//cout << y << endl;
 			if (bestSum > currentSum)
 			{
 				bestSum = currentSum;
 				path[pos][mask] = i;
-				//lastBestNode = i;
-				//cout << "lastBestNode = " << lastBestNode << endl << endl;
 			}
 
 		}
@@ -86,34 +94,23 @@ long double Dynamic::TSPDynamic()
 
 	// algorytm
 	int finalSum = tsp(1, 0);
+	decodePath(1, 0);
 	// koniec algorytmu
 
-	cout << "finalSum = " << finalSum << endl;
-	cout << "0->";
-	decodePath(1, 0);
-	cout << "0" << endl;
-
+	
 	// koniec pomiaru czasu
 	elapsed = read_QPC() - start;
 	long double timeElapsed;
 	timeElapsed = ((1000.0 * elapsed) / frequency);
 
 	// wyswietlenie wyniku
-	cout << "Miejsce na wynik\n";
-	for (int i = 0; i < currentPath.size(); i++)
+	cout << "Waga = " << finalSum << endl;
+	cout << "Sciezka: 0->";
+	for (int i = 0; i < bestPath.size()-1; i++)
 	{
-		cout << currentPath[i] << " ";
+		cout << bestPath[i] << "->";
 	}
-	cout << endl;
-
-	// czyszczenie
-	cout << "Zwalnianie pamieci\n";
-	for (int i = 0; i < N2; i++)
-	{
-		delete[] dp[i];
-	}
-	delete[] dp;
-	dp = nullptr;
+	cout << "0" << endl;
 
 	return timeElapsed;
 }
@@ -143,9 +140,9 @@ void Dynamic::printdp()
 void Dynamic::printpath()
 {
 
-	for (int i = 0; i < N2; i++)
+	for (int i = 0; i < N; i++)
 	{
-		for (int j = 0; j < N; j++)
+		for (int j = 0; j < N2; j++)
 		{
 			cout << path[i][j] << " ";
 		}
@@ -156,13 +153,11 @@ void Dynamic::printpath()
 //------------------------------------------------------------------------------------------------------------------------------------
 void Dynamic::decodePath(int mask, int pos)
 {
-	if (path[pos][mask] == -1)
+	if (path[pos][mask] != -1)
 	{
-		return;
+		int i = path[pos][mask];
+		bestPath.emplace_back(i);
+		int newMask = mask | (1 << i);
+		decodePath(newMask, i);
 	}
-	int i;
-	i = path[pos][mask];
-	cout << i << "->";
-	int newMask = mask | (1 << i);
-	decodePath(newMask, i);
 }

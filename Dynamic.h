@@ -6,6 +6,7 @@ class Dynamic
 {
 public:
 	Dynamic(int, int**);
+	~Dynamic();
 	int tsp(int, int);
 	long long int read_QPC();
 	long double TSPDynamic();
