@@ -67,10 +67,7 @@ void AdjacencyMatrix::fillFromFile(fstream* file)
 		// uruchomienie algorytmu. Na etapie mierzenia czasow modyfikowana byla liczba iteracji w petli for
 		for (int i = 0; i < 1; i++)
 		{
-			//Bruteforce brute(N, matrix);
-			//Dynamic2 dynamic(N, matrix);
 			Dynamic dynamic(N, matrix);
-			//sumElapsed += brute.TSPBrute();
 			sumElapsed += dynamic.TSPDynamic();
 		}
 

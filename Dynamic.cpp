@@ -75,7 +75,7 @@ int Dynamic::tsp(int mask, int pos)
 			if (bestSum > currentSum)
 			{
 				bestSum = currentSum;
-				path[pos][mask] = i;
+				path[pos][mask] = i; // tablica do odczytania sciezki koncowej
 			}
 
 		}
@@ -106,7 +106,7 @@ long double Dynamic::TSPDynamic()
 	// wyswietlenie wyniku
 	cout << "Waga = " << finalSum << endl;
 	cout << "Sciezka: 0->";
-	for (int i = 0; i < bestPath.size()-1; i++)
+	for (int i = 0; i <= bestPath.size()-1; i++)
 	{
 		cout << bestPath[i] << "->";
 	}
@@ -155,9 +155,9 @@ void Dynamic::decodePath(int mask, int pos)
 {
 	if (path[pos][mask] != -1)
 	{
-		int i = path[pos][mask];
+		int i = path[pos][mask]; // odczytywanie nastepnego wierzcholka do odwiedzenia
 		bestPath.emplace_back(i);
-		int newMask = mask | (1 << i);
+		int newMask = mask | (1 << i); // uaktualnienie maski o nastepny wierzcholek
 		decodePath(newMask, i);
 	}
 }

@@ -15,9 +15,6 @@ public:
 	void printpath();
 
 private:
-	//int* bestPath;
-	//int bestSum = 2147483647; // najwieksza dostepna wartosc
-	//int* currentPath;
 	vector<int> currentPath;
 	vector<int> bestPath;
 
@@ -27,6 +24,5 @@ private:
 	int N2;
 	int** matrix;
 	int visitedAll;
-	int lastBestNode;
 };
 
